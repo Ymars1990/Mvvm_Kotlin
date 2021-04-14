@@ -14,12 +14,12 @@ open class KtStringUtils {
         }
         //String是否为空
         fun isNullString(obj: String?): Boolean {
-            return obj == null || "" == obj.replace(" ".toRegex(), "")
+            return obj == null || "" .equals( obj.replace(" ".toRegex(), ""))
         }
 
         //String是否不为空
         fun isNotNullString(obj: String?): Boolean {
-            return !(obj != null && "" != obj.replace(" ".toRegex(), ""))
+            return !isNullString(obj)
         }
     }
 }
