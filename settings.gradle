@@ -1,0 +1,6 @@
+include ':network'
+rootProject.name='Mvvm_Kotlin'
+include ':app'
+include ':comutils'
+include ':component'
+include ':base'
