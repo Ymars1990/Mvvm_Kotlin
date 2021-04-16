@@ -20,9 +20,10 @@ import java.lang.ref.WeakReference
  * @author Mars
  * 基类Activity
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class LifecycerActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompatActivity() {
     lateinit var mCtx: Context
-
+    lateinit var vm: VM
+    lateinit var vb: VB
     val TAG: String by lazy {
         this.javaClass.simpleName
     }
@@ -33,7 +34,9 @@ abstract class BaseActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         initParams()
         setContentView(setLayout(savedInstanceState))
-
+        vm = ViewModelProvider.AndroidViewModelFactory(application)
+            .create(ClassReflactUtils.getClass(this))
+        vm.loadState.observe(this, observer)
         lifecycle.addObserver(MyLifecycleObserver(TAG))
         doWork()
     }
@@ -46,18 +49,41 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun setLayout(savedInstanceState: Bundle?): Int
     abstract fun doWork()
     abstract fun initParams()
-    abstract fun handlerMsg(msg: Message)
+
+    abstract fun updateUi()
+
+    private val observer by lazy {
+        Observer<DataState> {
+            it?.let {
+
+                when (it) {
+                    DataState.DataStateType.LOADING -> LogTools.i(TAG,"LOADING")
+                    DataState.DataStateType.SUCCESS ->{
+                        LogTools.i(TAG,"SUCCESS")
+                        updateUi()
+                    }
+                    DataState.DataStateType.ERROR -> LogTools.e(TAG,"ERROR")
+                    DataState.DataStateType.NETWORK_ERROR ->LogTools.e(TAG,"NETWORK_ERROR")
+                    DataState.DataStateType.NULL ->
+                        LogTools.e(TAG,"NULL")
+                    DataState.DataStateType.EMPTY ->
+                        LogTools.e(TAG,"EMPTY")
+                }
+            }
+        }
+    }
 
     val  handler:MyHandler by lazy{
         MyHandler(this)
     }
     companion object {
-        class MyHandler(activity:BaseActivity) : Handler() {
-            private val mActivity: WeakReference<BaseActivity> =
+        class MyHandler(activity:LifecycerActivity<*,*>) : Handler() {
+            private val mActivity: WeakReference<LifecycerActivity<*,*>> =
                 WeakReference(activity)
+
             override fun handleMessage(msg: Message) {
                 super.handleMessage(msg)
-//                mActivity!!.handlerMsg(msg)
+//                LogTools.i(mActivity!!.TAG,"MyHandler handleMessage")
             }
         }
     }
