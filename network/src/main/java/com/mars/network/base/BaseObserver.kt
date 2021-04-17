@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable
  * @author Mars
  *基类观察者
  */
-class BaseObserver<T : BaseReponseModel<T>>(
+class BaseObserver<T : BaseBean>(
     private val liveData: MutableLiveData<T>,
     private val loadState: MutableLiveData<DataState>,
     private val repository: BaseRepository
@@ -32,24 +32,13 @@ class BaseObserver<T : BaseReponseModel<T>>(
     }
 
     override fun onNext(response: T) {
-        LogTools.i(TAG,response.toString())
-        when (response.code) {
-            Constant.RESPONSE_SUCCESS -> {
-                if (response.res is List<*>) {
-                    if ((response.res as List<*>).isEmpty()) {
-                        loadState.postValue(DataState.DataStateType.EMPTY)
-                        return
-                    }
-                }
-                loadState.postValue(DataState.DataStateType.SUCCESS)
-                liveData.postValue(response)
-            }
-            Constant.RESPONSE_NOT_LOGIN -> {
-                loadState.postValue(DataState.DataStateType.ERROR_LOGIN_INVAILDATE)
-            }
-            else -> {
-                loadState.postValue(DataState.DataStateType.ERROR)
-            }
+        if(response!=null){
+            LogTools.i(TAG,response.toString())
+            loadState.postValue(DataState.DataStateType.SUCCESS)
+            liveData.postValue(response)
+        }else{
+            LogTools.i(TAG,"数据为空")
+            loadState.postValue(DataState.DataStateType.NULL)
         }
     }
 

@@ -1,8 +1,8 @@
 package com.mars.splash.bean
 
-import java.io.Serializable
+import com.mars.network.base.BaseBean
 
-class SplashAdBean : Serializable {
+class SplashAdBean : BaseBean() {
     var vertical: ArrayList<AdBean>? = null
 
     class AdBean() {

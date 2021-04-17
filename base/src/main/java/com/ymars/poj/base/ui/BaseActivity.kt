@@ -1,6 +1,7 @@
 package com.ymars.poj.base.ui
 
 import android.content.Context
+import android.nfc.Tag
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -31,10 +32,8 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mCtx = this
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        initParams()
         setContentView(setLayout(savedInstanceState))
-
-        lifecycle.addObserver(MyLifecycleObserver(TAG))
+        initParams()
         doWork()
     }
 
@@ -46,18 +45,21 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun setLayout(savedInstanceState: Bundle?): Int
     abstract fun doWork()
     abstract fun initParams()
-    abstract fun handlerMsg(msg: Message)
+    open abstract fun handlerMsg(msg: Message)
 
-    val  handler:MyHandler by lazy{
+    val handler: MyHandler by lazy {
         MyHandler(this)
     }
+
     companion object {
-        class MyHandler(activity:BaseActivity) : Handler() {
+        class MyHandler(activity: BaseActivity) : Handler() {
             private val mActivity: WeakReference<BaseActivity> =
                 WeakReference(activity)
+
             override fun handleMessage(msg: Message) {
                 super.handleMessage(msg)
-//                mActivity!!.handlerMsg(msg)
+                LogTools.i( mActivity.get()!!.TAG,msg.what.toString())
+                mActivity.get()!!.handlerMsg(msg)
             }
         }
     }

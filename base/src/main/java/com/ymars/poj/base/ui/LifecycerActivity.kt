@@ -20,35 +20,16 @@ import java.lang.ref.WeakReference
  * @author Mars
  * 基类Activity
  */
-abstract class LifecycerActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompatActivity() {
-    lateinit var mCtx: Context
+abstract class LifecycerActivity<VM : BaseViewModel<*>, VB : ViewBinding> : BaseActivity() {
     lateinit var vm: VM
     lateinit var vb: VB
-    val TAG: String by lazy {
-        this.javaClass.simpleName
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mCtx = this
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        initParams()
-        setContentView(setLayout(savedInstanceState))
+    override fun initParams() {
         vm = ViewModelProvider.AndroidViewModelFactory(application)
             .create(ClassReflactUtils.getClass(this))
         vm.loadState.observe(this, observer)
         lifecycle.addObserver(MyLifecycleObserver(TAG))
-        doWork()
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        handler!!.removeCallbacksAndMessages(null)
-    }
-
-    abstract fun setLayout(savedInstanceState: Bundle?): Int
-    abstract fun doWork()
-    abstract fun initParams()
 
     abstract fun updateUi()
 
@@ -69,21 +50,6 @@ abstract class LifecycerActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppC
                     DataState.DataStateType.EMPTY ->
                         LogTools.e(TAG,"EMPTY")
                 }
-            }
-        }
-    }
-
-    val  handler:MyHandler by lazy{
-        MyHandler(this)
-    }
-    companion object {
-        class MyHandler(activity:LifecycerActivity<*,*>) : Handler() {
-            private val mActivity: WeakReference<LifecycerActivity<*,*>> =
-                WeakReference(activity)
-
-            override fun handleMessage(msg: Message) {
-                super.handleMessage(msg)
-//                LogTools.i(mActivity!!.TAG,"MyHandler handleMessage")
             }
         }
     }

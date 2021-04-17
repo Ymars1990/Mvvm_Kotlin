@@ -17,7 +17,7 @@ interface ApiService {
      * 获取启动页广告
      */
     @GET("/v1/vertical/vertical")
-    fun getSplashAd(): Observable<BaseReponseModel<SplashAdBean>>
+    fun getSplashAd(): Observable<SplashAdBean>
 
 
 }

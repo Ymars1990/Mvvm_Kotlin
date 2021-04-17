@@ -9,7 +9,7 @@ import com.ymars.poj.base.state.DataState
 
 open class SplashRepository(private val loadState: MutableLiveData<DataState>) : ApiRepository() {
 
-    fun getSplashAd(liveData: MutableLiveData<BaseReponseModel<SplashAdBean>>) {
+    fun getSplashAd(liveData: MutableLiveData<SplashAdBean>) {
         apiService.getSplashAd().execute(BaseObserver(liveData, loadState, this))
     }
 }
