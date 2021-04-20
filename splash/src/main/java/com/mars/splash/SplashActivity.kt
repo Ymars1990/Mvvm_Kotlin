@@ -1,14 +1,15 @@
 package com.mars.splash
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Message
 import android.view.View
-import android.view.WindowInsets
+import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -25,17 +26,20 @@ import kotlin.random.Random
 
 @Route(path = ArouterConstant.Splash_MAIN)
 class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        hideSysBar()
+        super.onCreate(savedInstanceState)
+    }
     override fun setLayout(savedInstanceState: Bundle?): Int {
         return R.layout.activity_splash
     }
 
     override fun initParams() {
-        hideSysbar()
         super.initParams()
         vb = DataBindingUtil.setContentView(this, R.layout.activity_splash)
     }
 
-    fun hideSysbar(){
+    private fun hideSysBar(){
         if (Build.VERSION.SDK_INT >=30) {
             val controller = ViewCompat.getWindowInsetsController(window.decorView)
             controller?.also {
@@ -100,5 +104,6 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
             }
         }
     }
+
 
 }
