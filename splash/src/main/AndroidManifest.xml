@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mars.splash">
+    package="com.mars.splash"
+    xmlns:tools="http://schemas.android.com/tools">
     <application
         android:allowBackup="true"
         android:supportsRtl="true"
+        android:name=".SplashApplication"
         >
     </application>
 </manifest>

@@ -65,10 +65,10 @@ class Constant {
         const val code = "code"
         const val msg = "msg"
 
-        const val RESPONSE_SUCCESS = 0
-        const val RESPONSE_NOT_LOGIN = -1001
 
-        const val pageSize = 20
+        var moduleApps = arrayOf(
+            "com.mars.splash.SplashApplication"
+        )
     }
 
 }

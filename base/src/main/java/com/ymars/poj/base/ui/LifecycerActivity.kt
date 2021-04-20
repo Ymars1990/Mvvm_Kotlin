@@ -30,9 +30,6 @@ abstract class LifecycerActivity<VM : BaseViewModel<*>, VB : ViewBinding> : Base
         vm.loadState.observe(this, observer)
         lifecycle.addObserver(MyLifecycleObserver(TAG))
     }
-
-    abstract fun updateUi()
-
     private val observer by lazy {
         Observer<DataState> {
             it?.let {
@@ -41,7 +38,6 @@ abstract class LifecycerActivity<VM : BaseViewModel<*>, VB : ViewBinding> : Base
                     DataState.DataStateType.LOADING -> LogTools.i(TAG,"LOADING")
                     DataState.DataStateType.SUCCESS ->{
                         LogTools.i(TAG,"SUCCESS")
-                        updateUi()
                     }
                     DataState.DataStateType.ERROR -> LogTools.e(TAG,"ERROR")
                     DataState.DataStateType.NETWORK_ERROR ->LogTools.e(TAG,"NETWORK_ERROR")

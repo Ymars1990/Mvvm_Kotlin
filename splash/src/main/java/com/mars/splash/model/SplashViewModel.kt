@@ -12,7 +12,7 @@ import com.ymars.poj.base.model.BaseViewModel
 
 class SplashViewModel(application: Application) : BaseViewModel<SplashRepository>(application) {
 
-    var adInfor: MutableLiveData<SplashAdBean> = MutableLiveData()
+    val adInfor: MutableLiveData<SplashAdBean> = MutableLiveData()
     fun showAd() {
         mRespository.getSplashAd(adInfor)
     }

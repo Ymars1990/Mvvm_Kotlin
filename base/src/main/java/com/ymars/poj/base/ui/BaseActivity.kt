@@ -45,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun setLayout(savedInstanceState: Bundle?): Int
     abstract fun doWork()
     abstract fun initParams()
-    open abstract fun handlerMsg(msg: Message)
+     abstract fun handlerMsg(msg: Message)
 
     val handler: MyHandler by lazy {
         MyHandler(this)

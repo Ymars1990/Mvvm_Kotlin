@@ -15,6 +15,12 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -31,9 +37,15 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    dataBinding { enabled true }
+    buildFeatures{
+        dataBinding = true
+    }
 }
 
 dependencies {
+
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    kapt  'com.alibaba:arouter-compiler:1.2.2'
+
     api project(path: ':splash')
 }

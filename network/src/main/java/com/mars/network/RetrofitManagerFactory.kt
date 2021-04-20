@@ -35,6 +35,7 @@ class RetrofitManagerFactory private constructor() {
         retrofit = Retrofit.Builder()
             .baseUrl(Constant.BASE_SERVER_URL)
             .addConverterFactory(BaseConverterFactory.create())
+            .addConverterFactory(initGsonConverterFactory())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 //            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(initOkHttpClient())
@@ -65,6 +66,26 @@ class RetrofitManagerFactory private constructor() {
 
             chain.proceed(request)
         }
+    }
+    private fun initGsonConverterFactory(): GsonConverterFactory {
+        return GsonConverterFactory.create(
+            GsonBuilder()
+                .registerTypeAdapter(Int::class.java, IntegerDefault0Adapter())
+                .registerTypeAdapter(Int::class.javaPrimitiveType, IntegerDefault0Adapter())
+                .registerTypeAdapter(Double::class.java, DoubleDefault0Adapter())
+                .registerTypeAdapter(
+                    Double::class.javaPrimitiveType,
+                    DoubleDefault0Adapter()
+                )
+                .registerTypeAdapter(Long::class.java, LongDefault0Adapter())
+                .registerTypeAdapter(
+                    Long::class.javaPrimitiveType,
+                    LongDefault0Adapter()
+                )
+                .registerTypeAdapter(String::class.java, StringDefault0Adapter())
+                .create()
+        )
+
     }
 }
 
