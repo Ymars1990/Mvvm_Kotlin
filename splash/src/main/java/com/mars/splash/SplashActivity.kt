@@ -1,15 +1,12 @@
 package com.mars.splash
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Message
 import android.view.View
-import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -104,6 +101,4 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
             }
         }
     }
-
-
 }
