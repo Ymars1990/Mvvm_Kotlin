@@ -2,8 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="com.ymars.poj.mvvm_kotlin.R"/>
-        <import type="com.bumptech.glide.Glide"/>
+
+        <import type="com.ymars.poj.mvvm_kotlin.R" />
+
+        <import type="com.bumptech.glide.Glide" />
 
         <variable
             name="tabBean"
@@ -11,30 +13,33 @@
 
         <variable
             name="adapter"
-            type="com.ymars.poj.mvvm_kotlin.adapter.MainTabAdapter"/>
+            type="com.ymars.poj.mvvm_kotlin.adapter.MainTabAdapter" />
     </data>
 
-    <LinearLayout  xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/tabItemLl"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:onClick="@{(view)->adapter.onItemClick(view,tabBean)}"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
+
         <ImageView
             android:id="@+id/tabIv"
-            android:layout_width="@dimen/dp30"
-            android:src="@mipmap/ic_launcher"
-            android:layout_height="@dimen/dp30"/>
+            android:layout_width="@dimen/dp25"
+            android:layout_height="@dimen/dp25"
+            android:background="@color/app_theme_title_color"
+            android:scaleType="fitXY"
+            app:img_url="@{tabBean.netIcon}" />
+
         <TextView
             android:id="@+id/tabTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp3"
             android:text="@{tabBean.txt}"
-            android:textSize="@dimen/sp12"
-            android:textColor="@{tabBean.state==1?0xFF6200EE:0xFF000000}"/>
+            android:textColor="@{tabBean.state==1?0xFF6200EE:0xFF000000}"
+            android:textSize="@dimen/sp12" />
 
     </LinearLayout>
 </layout>

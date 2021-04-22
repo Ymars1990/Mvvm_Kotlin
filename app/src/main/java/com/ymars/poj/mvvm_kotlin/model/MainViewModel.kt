@@ -17,7 +17,7 @@ class MainViewModel(application: Application) : BaseViewModel<MainRepository>(ap
     val tabBeans: MutableLiveData<ArrayList<TabBean>>  by lazy {
         MutableLiveData<ArrayList<TabBean>>().also {
             it.value = arrayListOf(TabBean("首页", R.mipmap.ic_launcher,"",1,0)
-                ,TabBean("广场", R.mipmap.ic_launcher,"",0,1)
+                ,TabBean("广场", R.mipmap.ic_launcher,"https://images.5296live.com/upload/202104/20/012e5792125943a692933761554c4f2c.jpeg",0,1)
                 ,TabBean("我的", R.mipmap.ic_launcher,"",0,2))
         }
     }
