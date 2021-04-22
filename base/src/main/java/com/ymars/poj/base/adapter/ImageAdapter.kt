@@ -12,8 +12,8 @@ class ImageAdapter {
         fun setSrcByImgRes(view: ImageView, img_url: String) {
             Glide.with(view.context)
                 .load(img_url)
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.ic_default)
+                .error(R.mipmap.ic_default)
                 .into(view)
         }
 

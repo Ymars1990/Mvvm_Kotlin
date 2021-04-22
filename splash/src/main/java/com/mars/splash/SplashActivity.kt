@@ -31,8 +31,8 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
         return R.layout.activity_splash
     }
 
-    override fun initParams() {
-        super.initParams()
+    override fun initParams(savedInstanceState: Bundle?) {
+        super.initParams(savedInstanceState)
         vb = DataBindingUtil.setContentView(this, R.layout.activity_splash)
     }
 

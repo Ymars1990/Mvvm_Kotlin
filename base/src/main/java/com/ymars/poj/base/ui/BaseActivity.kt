@@ -32,8 +32,7 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mCtx = this
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(setLayout(savedInstanceState))
-        initParams()
+        initParams(savedInstanceState)
         doWork()
     }
 
@@ -44,7 +43,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     abstract fun setLayout(savedInstanceState: Bundle?): Int
     abstract fun doWork()
-    abstract fun initParams()
+    abstract fun initParams(savedInstanceState: Bundle?)
      abstract fun handlerMsg(msg: Message)
 
     val handler: MyHandler by lazy {

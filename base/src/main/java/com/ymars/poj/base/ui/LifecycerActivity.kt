@@ -6,10 +6,12 @@ import android.os.Handler
 import android.os.Message
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewbinding.ViewBinding
+import com.ymars.poj.base.R
 import com.ymars.poj.base.model.BaseViewModel
 import com.ymars.poj.base.state.DataState
 import com.ymars.poj.comutils.ClassReflactUtils
@@ -24,27 +26,30 @@ abstract class LifecycerActivity<VM : BaseViewModel<*>, VB : ViewBinding> : Base
     lateinit var vm: VM
     lateinit var vb: VB
 
-    override fun initParams() {
+    override fun initParams(savedInstanceState: Bundle?) {
         vm = ViewModelProvider.AndroidViewModelFactory(application)
             .create(ClassReflactUtils.getClass(this))
         vm.loadState.observe(this, observer)
         lifecycle.addObserver(MyLifecycleObserver(TAG))
+        vb = DataBindingUtil.setContentView(this, setLayout(savedInstanceState))
+
     }
+
     private val observer by lazy {
         Observer<DataState> {
             it?.let {
 
                 when (it) {
-                    DataState.DataStateType.LOADING -> LogTools.i(TAG,"LOADING")
-                    DataState.DataStateType.SUCCESS ->{
-                        LogTools.i(TAG,"SUCCESS")
+                    DataState.DataStateType.LOADING -> LogTools.i(TAG, "LOADING")
+                    DataState.DataStateType.SUCCESS -> {
+                        LogTools.i(TAG, "SUCCESS")
                     }
-                    DataState.DataStateType.ERROR -> LogTools.e(TAG,"ERROR")
-                    DataState.DataStateType.NETWORK_ERROR ->LogTools.e(TAG,"NETWORK_ERROR")
+                    DataState.DataStateType.ERROR -> LogTools.e(TAG, "ERROR")
+                    DataState.DataStateType.NETWORK_ERROR -> LogTools.e(TAG, "NETWORK_ERROR")
                     DataState.DataStateType.NULL ->
-                        LogTools.e(TAG,"NULL")
+                        LogTools.e(TAG, "NULL")
                     DataState.DataStateType.EMPTY ->
-                        LogTools.e(TAG,"EMPTY")
+                        LogTools.e(TAG, "EMPTY")
                 }
             }
         }

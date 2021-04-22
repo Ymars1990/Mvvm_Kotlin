@@ -29,7 +29,6 @@
             android:id="@+id/tabIv"
             android:layout_width="@dimen/dp25"
             android:layout_height="@dimen/dp25"
-            android:background="@color/app_theme_title_color"
             android:scaleType="fitXY"
             app:img_url="@{tabBean.netIcon}" />
 

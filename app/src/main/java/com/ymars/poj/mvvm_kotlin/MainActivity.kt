@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.mars.splash.bean.SplashAdBean
 import com.ymars.poj.base.ui.LifecycerActivity
 import com.ymars.poj.component.ArouterConstant
+import com.ymars.poj.comutils.LogTools
 import com.ymars.poj.mvvm_kotlin.adapter.MainTabAdapter
 import com.ymars.poj.mvvm_kotlin.bean.TabBean
 import com.ymars.poj.mvvm_kotlin.databinding.ActivityMainBinding
@@ -22,9 +23,8 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
     override fun setLayout(savedInstanceState: Bundle?): Int {
         return R.layout.activity_main
     }
-    override fun initParams() {
-        super.initParams()
-        vb =  DataBindingUtil.setContentView(this,R.layout.activity_main)
+    override fun initParams(savedInstanceState: Bundle?) {
+        super.initParams(savedInstanceState)
         vm.tabBeans.observe(this, observer)
         val layoutManager = GridLayoutManager(this,vm.tabBeans.value!!.size)
         vb.tabRv.layoutManager = layoutManager
@@ -43,6 +43,7 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
         Observer<ArrayList<TabBean>> {
             it?.let {
                 adapter!!.refreshData(it)
+                LogTools.i(TAG,it.toString())
             }
         }
     }
