@@ -3,12 +3,16 @@ package com.ymars.poj.base.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<T>(var data: ArrayList<T> = arrayListOf()) :
-    RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseAdapter<T,V:ViewDataBinding>(var data: ArrayList<T> = arrayListOf()) :
+    RecyclerView.Adapter<BaseViewHolder<V>>() {
+    val TAG: String by lazy {
+        this.javaClass.simpleName
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<V> {
         return BaseViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent?.context),
@@ -20,14 +24,16 @@ abstract class BaseAdapter<T>(var data: ArrayList<T> = arrayListOf()) :
     }
 
     override fun getItemCount(): Int {
-        if (data == null || data.size == 0) {
-            return 0
+        return if (data.size == 0) {
+            0
         } else {
-            return data.size
+            data.size
         }
     }
 
     fun refreshData(data: ArrayList<T>) {
-        this.data = data
+        this.data.clear()
+        this.data.addAll(data)
+        this.notifyDataSetChanged()
     }
 }

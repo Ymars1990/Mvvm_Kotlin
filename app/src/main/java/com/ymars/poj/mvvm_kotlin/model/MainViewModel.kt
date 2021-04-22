@@ -16,9 +16,9 @@ import com.ymars.poj.mvvm_kotlin.bean.TabBean
 class MainViewModel(application: Application) : BaseViewModel<MainRepository>(application) {
     val tabBeans: MutableLiveData<ArrayList<TabBean>>  by lazy {
         MutableLiveData<ArrayList<TabBean>>().also {
-            it.value = arrayListOf(TabBean("首页", R.mipmap.ic_launcher,"",1)
-                ,TabBean("广场", R.mipmap.ic_launcher,"",0)
-                ,TabBean("我的", R.mipmap.ic_launcher,"",0))
+            it.value = arrayListOf(TabBean("首页", R.mipmap.ic_launcher,"",1,0)
+                ,TabBean("广场", R.mipmap.ic_launcher,"",0,1)
+                ,TabBean("我的", R.mipmap.ic_launcher,"",0,2))
         }
     }
      fun getTabBean(){

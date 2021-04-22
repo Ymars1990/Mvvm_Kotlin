@@ -16,6 +16,7 @@
 
     <LinearLayout  xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/tabItemLl"
         android:layout_width="match_parent"
         android:gravity="center"
         android:onClick="@{(view)->adapter.onItemClick(view,tabBean)}"
@@ -33,7 +34,7 @@
             android:layout_marginTop="@dimen/dp3"
             android:text="@{tabBean.txt}"
             android:textSize="@dimen/sp12"
-            android:textColor="@{tabBean.state==1?0xFF6200EE:0xFF00000}"/>
+            android:textColor="@{tabBean.state==1?0xFF6200EE:0xFF000000}"/>
 
     </LinearLayout>
 </layout>
