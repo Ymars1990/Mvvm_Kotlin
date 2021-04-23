@@ -28,6 +28,7 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
     override fun initParams(savedInstanceState: Bundle?) {
         super.initParams(savedInstanceState)
         vm.tabBeans.observe(this, observer)
+        vm.tabSelectPos.observe(this, posObserver)
         val layoutManager = GridLayoutManager(this, vm.tabBeans.value!!.size)
         vb.tabRv.layoutManager = layoutManager
     }
@@ -46,6 +47,15 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
         Observer<ArrayList<TabBean>> {
             it?.let {
                 adapter!!.refreshData(it)
+            }
+        }
+    }
+    private val posObserver by lazy {
+        Observer<Int> {
+            it?.let {
+                LogTools.i(TAG, vm.tabBeans.value?.get(it).toString())
+                vb.testTv.text = vm.tabBeans.value?.get(vm.tabSelectPos.value!!)?.txt
+
             }
         }
     }

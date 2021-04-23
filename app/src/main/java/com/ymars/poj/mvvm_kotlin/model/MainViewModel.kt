@@ -35,7 +35,6 @@ class MainViewModel(application: Application) : BaseViewModel<MainRepository>(ap
 
     var tabSelectPos: MutableLiveData<Int> = MutableLiveData<Int>(0)
     fun onItemClick(v: View, tabBean: TabBean) {
-        LogTools.i(TAG, tabBean.toString())
         when (v.id) {
             R.id.tabItemLl -> {
                 if (tabSelectPos.value != tabBean.pos) {
@@ -48,8 +47,8 @@ class MainViewModel(application: Application) : BaseViewModel<MainRepository>(ap
                         }
                     }
                     tabBeans.postValue(tabBeans.value)
-                }else{
-                    LogTools.i(TAG,"点击tab 与上次tab相同")
+                } else {
+                    LogTools.i(TAG, "点击tab 与上次tab相同")
                 }
             }
         }
