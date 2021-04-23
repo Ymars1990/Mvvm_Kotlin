@@ -4,7 +4,7 @@
     package="com.ymars.poj.mvvm_kotlin">
 
     <application
-        android:name="com.ymars.poj.mvvm_kotlin.MainApplication"
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
     </application>

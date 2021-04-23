@@ -1,18 +1,14 @@
-package com.ymars.poj.mvvm_kotlin
+package com.ymars.poj.mvvm_kotlin.ui
 
 import android.os.Bundle
 import android.os.Message
-import android.view.View
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.mars.splash.bean.SplashAdBean
 import com.ymars.poj.base.ui.LifecycerActivity
 import com.ymars.poj.component.ArouterConstant
 import com.ymars.poj.comutils.LogTools
+import com.ymars.poj.mvvm_kotlin.R
 import com.ymars.poj.mvvm_kotlin.adapter.MainTabAdapter
 import com.ymars.poj.mvvm_kotlin.bean.TabBean
 import com.ymars.poj.mvvm_kotlin.databinding.ActivityMainBinding
@@ -21,6 +17,9 @@ import com.ymars.poj.mvvm_kotlin.model.MainViewModel
 @Route(path = ArouterConstant.APP_MAIN)
 class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
     var adapter: MainTabAdapter? = null
+    var txt: String = "首页"
+
+    var testFragment: TestFragment? = null
     override fun setLayout(savedInstanceState: Bundle?): Int {
         return R.layout.activity_main
     }
@@ -31,6 +30,8 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
         vm.tabSelectPos.observe(this, posObserver)
         val layoutManager = GridLayoutManager(this, vm.tabBeans.value!!.size)
         vb.tabRv.layoutManager = layoutManager
+        testFragment = TestFragment()
+        replaceFragment(testFragment!!)
     }
 
     override fun handlerMsg(msg: Message) {
@@ -54,9 +55,18 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
         Observer<Int> {
             it?.let {
                 LogTools.i(TAG, vm.tabBeans.value?.get(it).toString())
-                vb.testTv.text = vm.tabBeans.value?.get(vm.tabSelectPos.value!!)?.txt
+                txt = vm.tabBeans.value?.get(it)?.txt!!
+                testFragment!!.vm.mTxt.postValue(txt)
 
             }
         }
+    }
+
+    private fun replaceFragment(fragment: TestFragment) {
+        val fragmentManager = supportFragmentManager //获取FragmentManager
+        val transaction = fragmentManager.beginTransaction() //开启一个事务
+        transaction.replace(R.id.testTv, fragment)  //替换容器内的fragment
+        transaction.addToBackStack(null)    //返回栈,实现按下back键返回上一个fragment
+        transaction.commit()    //提交事务
     }
 }

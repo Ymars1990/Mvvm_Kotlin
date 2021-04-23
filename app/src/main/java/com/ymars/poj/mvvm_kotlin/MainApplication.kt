@@ -5,7 +5,7 @@ import com.ymars.poj.base.BaseApplication
 import com.ymars.poj.base.Constant
 import com.ymars.poj.comutils.LogTools
 
-open class MainApplication: BaseApplication() {
+open class MainApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         LogTools.i(TAG, "initArouter")

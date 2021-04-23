@@ -4,10 +4,27 @@ import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.ymars.poj.comutils.LogTools
 
-open abstract class BaseApplication: Application() {
+open class BaseApplication : Application() {
+
+    companion object {
+        private var instance: BaseApplication? = null
+            get() {
+                if (field == null) {
+                    field = BaseApplication()
+                }
+                return field
+            }
+
+        @Synchronized
+        fun get(): BaseApplication {
+            return instance!!
+        }
+    }
+
     val TAG: String by lazy {
         this.javaClass.simpleName
     }
+
     override fun onCreate() {
         super.onCreate()
         initModuleApp(this)
@@ -24,5 +41,8 @@ open abstract class BaseApplication: Application() {
         ARouter.init(this);
         LogTools.i(TAG, "initArouter")
     }
-    abstract fun initModuleApp(application: BaseApplication?)
+
+    open fun initModuleApp(application: BaseApplication?) {
+
+    }
 }
