@@ -4,12 +4,20 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.ymars.poj.base.R
+import com.ymars.poj.comutils.LogTools
 
 class ImageAdapter {
+
+
     companion object {
+        val TAG: String by lazy {
+            this.javaClass.simpleName
+        }
+
         @BindingAdapter("app:img_url")
         @JvmStatic
         fun setSrcByImgRes(view: ImageView, img_url: String) {
+            LogTools.i(TAG, img_url)
             Glide.with(view.context)
                 .load(img_url)
                 .placeholder(R.mipmap.ic_default)

@@ -2,6 +2,7 @@ package com.ymars.poj.mvvm_kotlin
 
 import android.os.Bundle
 import android.os.Message
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,14 +20,15 @@ import com.ymars.poj.mvvm_kotlin.model.MainViewModel
 
 @Route(path = ArouterConstant.APP_MAIN)
 class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
-    var adapter:MainTabAdapter?=null
+    var adapter: MainTabAdapter? = null
     override fun setLayout(savedInstanceState: Bundle?): Int {
         return R.layout.activity_main
     }
+
     override fun initParams(savedInstanceState: Bundle?) {
         super.initParams(savedInstanceState)
         vm.tabBeans.observe(this, observer)
-        val layoutManager = GridLayoutManager(this,vm.tabBeans.value!!.size)
+        val layoutManager = GridLayoutManager(this, vm.tabBeans.value!!.size)
         vb.tabRv.layoutManager = layoutManager
     }
 
@@ -35,15 +37,15 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun doWork() {
         vm.getTabBean()
-        adapter = MainTabAdapter()
-        vb.tabRv.adapter =adapter
+        adapter = MainTabAdapter(vm)
+        vb.tabRv.adapter = adapter
+
     }
 
     private val observer by lazy {
         Observer<ArrayList<TabBean>> {
             it?.let {
                 adapter!!.refreshData(it)
-                LogTools.i(TAG,it.toString())
             }
         }
     }

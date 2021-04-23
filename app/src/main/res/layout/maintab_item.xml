@@ -12,8 +12,8 @@
             type="com.ymars.poj.mvvm_kotlin.bean.TabBean" />
 
         <variable
-            name="adapter"
-            type="com.ymars.poj.mvvm_kotlin.adapter.MainTabAdapter" />
+            name="mainVModel"
+            type="com.ymars.poj.mvvm_kotlin.model.MainViewModel" />
     </data>
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:onClick="@{(view)->adapter.onItemClick(view,tabBean)}"
+        android:onClick="@{(view)->mainVModel.onItemClick(view,tabBean)}"
         android:orientation="vertical">
 
         <ImageView
