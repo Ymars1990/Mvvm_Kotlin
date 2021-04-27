@@ -62,11 +62,14 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
     private fun replaceFragment(fragment: TestFragment) {
         val fragmentManager = supportFragmentManager //获取FragmentManager
         val transaction = fragmentManager.beginTransaction() //开启一个事务
         transaction.replace(R.id.testTv, fragment)  //替换容器内的fragment
-        transaction.addToBackStack(null)    //返回栈,实现按下back键返回上一个fragment
+//        transaction.addToBackStack(null)    //返回栈,实现按下back键返回上一个fragment
         transaction.commit()    //提交事务
     }
 }

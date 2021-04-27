@@ -1,6 +1,6 @@
 package com.mars.network.interceptor
 
-import com.ymars.poj.base.Constant.Companion.BASE_SERVER_URL
+import com.mars.network.NetConstant.Companion.BASE_SERVER_URL
 import com.ymars.poj.comutils.KtStringUtils
 import com.ymars.poj.comutils.LogTools
 import okhttp3.*
@@ -38,7 +38,7 @@ class FilterUrlInterceptor : Interceptor {
             builder.removeHeader("dynamics_url")
             //匹配获得新的BaseUrl
             val headerValue = headerValues[0]
-            LogTools.i("headerValue", headerValue)
+            LogTools.i(TAG, headerValue)
             var newBaseUrl: HttpUrl? = null
             newBaseUrl = if (KtStringUtils.isNotNullString(headerValue)) {
                 headerValue.toHttpUrlOrNull()
@@ -54,7 +54,7 @@ class FilterUrlInterceptor : Interceptor {
                 .build()
             //重建这个request，通过builder.url(newFullUrl).build()；
             // 然后返回一个response至此结束修改
-            LogTools.i("Url", "intercept: $newFullUrl")
+            LogTools.i(TAG, "intercept: $newFullUrl")
             return chain.proceed(builder.url(newFullUrl).build())
         }
         return chain.proceed(request)

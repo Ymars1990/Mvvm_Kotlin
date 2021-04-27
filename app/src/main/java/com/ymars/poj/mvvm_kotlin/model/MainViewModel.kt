@@ -3,16 +3,17 @@ package com.ymars.poj.mvvm_kotlin.model
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.MutableLiveData
-import com.mars.splash.bean.SplashAdBean
-import com.ymars.poj.mvvm_kotlin.repository.MainRepository
+import com.mars.network.RetrofitManagerFactory
+import com.mars.splash.repository.SplashService
 import com.ymars.poj.base.model.BaseViewModel
 import com.ymars.poj.comutils.LogTools
 import com.ymars.poj.mvvm_kotlin.R
 import com.ymars.poj.mvvm_kotlin.bean.TabBean
+import com.ymars.poj.mvvm_kotlin.repository.MainService
 
 /**
  */
-class MainViewModel(application: Application) : BaseViewModel<MainRepository>(application) {
+class MainViewModel(application: Application) : BaseViewModel<MainService>(application) {
     val tabBeans: MutableLiveData<ArrayList<TabBean>> by lazy {
         MutableLiveData<ArrayList<TabBean>>().also {
             it.value = arrayListOf(
@@ -30,7 +31,6 @@ class MainViewModel(application: Application) : BaseViewModel<MainRepository>(ap
     }
 
     fun getTabBean() {
-        mRespository.getTabBean(tabBeans)
     }
 
     var tabSelectPos: MutableLiveData<Int> = MutableLiveData<Int>(0)
@@ -52,5 +52,9 @@ class MainViewModel(application: Application) : BaseViewModel<MainRepository>(ap
                 }
             }
         }
+    }
+
+    override fun initApiservice(): MainService {
+        return RetrofitManagerFactory.instance.create(MainService::class.java)
     }
 }

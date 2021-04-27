@@ -3,31 +3,57 @@ package com.ymars.poj.base.model
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.ymars.poj.base.repository.BaseRepository
+import com.mars.network.RetrofitManagerFactory
+import com.mars.network.base.BaseApiService
+import com.mars.network.base.BaseError
+import com.mars.network.base.BaseReponse
 import com.ymars.poj.base.state.DataState
-import com.ymars.poj.comutils.ClassReflactUtils
+import com.ymars.poj.comutils.ClassReflectUtils
+import com.ymars.poj.comutils.LogTools
+import kotlinx.coroutines.*
+import java.lang.reflect.ParameterizedType
+
 /**
  * @author Mars
  * MVVM  基类ViewModel
  */
-open class BaseViewModel<T : BaseRepository>(application: Application) :
+open abstract class BaseViewModel<T : BaseApiService>(application: Application) :
     AndroidViewModel(application) {
-    protected var TAG: String? = null
+    var errorData = MutableLiveData<BaseError>()//错误信息
 
-    init {
-        TAG = this.javaClass.simpleName
+    val TAG: String by lazy {
+        this.javaClass.simpleName
     }
-
     val loadState by lazy { MutableLiveData<DataState>() }
 
-    val mRespository: T by lazy {
-        (ClassReflactUtils.getClass<T>(this)).getDeclaredConstructor(MutableLiveData::class.java)
-            .newInstance(loadState)
+    val apiService: T by lazy {
+        initApiservice()
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        mRespository.unSubscribe()
-    }
+    abstract fun initApiservice(): T
 
+    fun <D> launch(
+        block: suspend CoroutineScope.() -> BaseReponse<D>,//请求接口方法，T表示data实体泛型，调用时可将data对应的bean传入即可
+        liveData: MutableLiveData<D>,
+        reqUrl: String
+    ) {
+        GlobalScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) { block() }
+                if (result.code == 0) {//请求成功
+                    liveData.postValue(result.res)
+                    loadState.postValue(DataState.DataStateType.SUCCESS)
+                } else {
+                    loadState.postValue(DataState.DataStateType.ERROR)
+                    errorData.postValue(BaseError(result.code, result.msg, reqUrl))
+                }
+            } catch (e: Throwable) {//接口请求失败
+                LogTools.e(TAG, "请求异常>>" + e.message)
+                loadState.postValue(DataState.DataStateType.NETWORK_ERROR)
+                errorData.postValue(BaseError(0xE1, e.message, reqUrl))
+            } finally {//请求结束
+                LogTools.i(TAG, "请求结束Finally")
+            }
+        }
+    }
 }

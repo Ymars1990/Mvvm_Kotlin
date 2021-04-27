@@ -1,19 +1,11 @@
 package com.ymars.poj.base.ui
 
 import android.content.Context
-import android.nfc.Tag
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.viewbinding.ViewBinding
-import com.ymars.poj.base.model.BaseViewModel
-import com.ymars.poj.base.state.DataState
-import com.ymars.poj.comutils.ClassReflactUtils
 import com.ymars.poj.comutils.LogTools
 import java.lang.ref.WeakReference
 

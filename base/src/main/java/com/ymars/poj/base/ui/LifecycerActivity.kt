@@ -1,22 +1,14 @@
 package com.ymars.poj.base.ui
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
-import android.view.Window
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.viewbinding.ViewBinding
-import com.ymars.poj.base.R
 import com.ymars.poj.base.model.BaseViewModel
 import com.ymars.poj.base.state.DataState
-import com.ymars.poj.comutils.ClassReflactUtils
+import com.ymars.poj.comutils.ClassReflectUtils
 import com.ymars.poj.comutils.LogTools
-import java.lang.ref.WeakReference
 
 /**
  * @author Mars
@@ -28,7 +20,7 @@ abstract class LifecycerActivity<VM : BaseViewModel<*>, VB : ViewBinding> : Base
 
     override fun initParams(savedInstanceState: Bundle?) {
         vm = ViewModelProvider.AndroidViewModelFactory(application)
-            .create(ClassReflactUtils.getClass(this))
+            .create(ClassReflectUtils.getClass(this))
         vm.loadState.observe(this, observer)
         lifecycle.addObserver(MyLifecycleObserver(TAG))
         vb = DataBindingUtil.setContentView(this, setLayout(savedInstanceState))

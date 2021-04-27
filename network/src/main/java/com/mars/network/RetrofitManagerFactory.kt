@@ -5,7 +5,6 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.mars.network.interceptor.LoggingInterceptor
 import com.mars.network.gsonfactory.*
 import com.mars.network.interceptor.FilterUrlInterceptor
-import com.ymars.poj.base.Constant
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -34,11 +33,12 @@ class RetrofitManagerFactory private constructor() {
 
     init {
         retrofit = Retrofit.Builder()
-            .baseUrl(Constant.BASE_SERVER_URL)
-            .addConverterFactory(BaseConverterFactory.create())
-            .addConverterFactory(initGsonConverterFactory())
+            .baseUrl(NetConstant.BASE_SERVER_URL)
+//            .addConverterFactory(BaseConverterFactory.create())
+//            .addConverterFactory(initGsonConverterFactory())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 //            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .addConverterFactory(GsonConverterFactory.create())
             .client(initOkHttpClient())
             .build();
     }
@@ -70,26 +70,6 @@ class RetrofitManagerFactory private constructor() {
         }
     }
 
-    private fun initGsonConverterFactory(): GsonConverterFactory {
-        return GsonConverterFactory.create(
-            GsonBuilder()
-                .registerTypeAdapter(Int::class.java, IntegerDefault0Adapter())
-                .registerTypeAdapter(Int::class.javaPrimitiveType, IntegerDefault0Adapter())
-                .registerTypeAdapter(Double::class.java, DoubleDefault0Adapter())
-                .registerTypeAdapter(
-                    Double::class.javaPrimitiveType,
-                    DoubleDefault0Adapter()
-                )
-                .registerTypeAdapter(Long::class.java, LongDefault0Adapter())
-                .registerTypeAdapter(
-                    Long::class.javaPrimitiveType,
-                    LongDefault0Adapter()
-                )
-                .registerTypeAdapter(String::class.java, StringDefault0Adapter())
-                .create()
-        )
-
-    }
 }
 
 

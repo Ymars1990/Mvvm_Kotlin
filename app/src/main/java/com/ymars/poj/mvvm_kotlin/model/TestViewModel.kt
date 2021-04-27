@@ -1,18 +1,17 @@
 package com.ymars.poj.mvvm_kotlin.model
 
 import android.app.Application
-import android.view.View
 import androidx.lifecycle.MutableLiveData
-import com.mars.splash.bean.SplashAdBean
-import com.ymars.poj.mvvm_kotlin.repository.MainRepository
+import com.mars.network.RetrofitManagerFactory
 import com.ymars.poj.base.model.BaseViewModel
-import com.ymars.poj.comutils.LogTools
-import com.ymars.poj.mvvm_kotlin.R
-import com.ymars.poj.mvvm_kotlin.bean.TabBean
+import com.ymars.poj.mvvm_kotlin.repository.MainService
 
 /**
  */
-class TestViewModel(application: Application) : BaseViewModel<MainRepository>(application) {
-     val mTxt: MutableLiveData<String> = MutableLiveData<String>("首页")
+class TestViewModel(application: Application) : BaseViewModel<MainService>(application) {
+    val mTxt: MutableLiveData<String> = MutableLiveData<String>("首页")
+    override fun initApiservice(): MainService {
+        return RetrofitManagerFactory.instance.create(MainService::class.java)
+    }
 
 }
