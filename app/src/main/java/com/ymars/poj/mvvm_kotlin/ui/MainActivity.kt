@@ -62,9 +62,6 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
     private fun replaceFragment(fragment: TestFragment) {
         val fragmentManager = supportFragmentManager //获取FragmentManager
         val transaction = fragmentManager.beginTransaction() //开启一个事务

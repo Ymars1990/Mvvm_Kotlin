@@ -27,6 +27,7 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
         hideSysBar()
         super.onCreate(savedInstanceState)
     }
+
     override fun setLayout(savedInstanceState: Bundle?): Int {
         return R.layout.activity_splash
     }
@@ -36,8 +37,8 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
         vb = DataBindingUtil.setContentView(this, R.layout.activity_splash)
     }
 
-    private fun hideSysBar(){
-        if (Build.VERSION.SDK_INT >=30) {
+    private fun hideSysBar() {
+        if (Build.VERSION.SDK_INT >= 30) {
             val controller = ViewCompat.getWindowInsetsController(window.decorView)
             controller?.also {
                 it.hide(WindowInsetsCompat.Type.statusBars())
@@ -50,6 +51,7 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
             )
         }
     }
+
     override fun doWork() {
         handler.sendEmptyMessage(0x01);
         vm.showAd()
@@ -67,10 +69,12 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
                     handler.sendEmptyMessageDelayed(0x01, 1000)
                 } else {
                     LogTools.i(TAG, "广告结束，跳转主页")
-                    ARouter.getInstance().build(ArouterConstant.APP_MAIN).navigation()
-                    finish()
+                    goMain()
                 }
-
+            }
+            0xE1 -> {
+                LogTools.i(TAG, "跳过广告，跳转主页")
+                goMain()
             }
         }
     }
@@ -79,11 +83,16 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
         when (v?.id) {
             R.id.adDuraTv -> {
                 LogTools.i(TAG, "跳过广告，跳转主页")
-                handler.removeCallbacksAndMessages(null)
-                ARouter.getInstance().build(ArouterConstant.APP_MAIN).navigation()
-                finish()
+                goMain()
             }
         }
+    }
+
+    private fun goMain() {
+
+        handler.removeCallbacksAndMessages(null)
+        ARouter.getInstance().build(ArouterConstant.APP_MAIN).navigation()
+        finish()
     }
 
     private val observer by lazy {

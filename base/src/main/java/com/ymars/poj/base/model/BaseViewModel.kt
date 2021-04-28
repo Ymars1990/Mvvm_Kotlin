@@ -3,6 +3,7 @@ package com.ymars.poj.base.model
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.mars.network.RetrofitManagerFactory
 import com.mars.network.base.BaseApiService
 import com.mars.network.base.BaseError
@@ -37,7 +38,7 @@ open abstract class BaseViewModel<T : BaseApiService>(application: Application) 
         liveData: MutableLiveData<D>,
         reqUrl: String
     ) {
-        GlobalScope.launch {
+        viewModelScope.launch {
             try {
                 val result = withContext(Dispatchers.IO) { block() }
                 if (result.code == 0) {//请求成功
