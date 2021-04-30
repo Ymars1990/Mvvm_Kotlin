@@ -2,8 +2,11 @@ package com.ymars.poj.mvvm_kotlin.ui
 
 import android.os.Bundle
 import android.os.Message
+import android.view.View
 import androidx.lifecycle.Observer
+import com.alibaba.android.arouter.launcher.ARouter
 import com.ymars.poj.base.ui.LifrcyclerFragment
+import com.ymars.poj.component.ArouterConstant
 import com.ymars.poj.comutils.LogTools
 import com.ymars.poj.mvvm_kotlin.R
 import com.ymars.poj.mvvm_kotlin.databinding.FragmentTestBinding
@@ -18,6 +21,9 @@ class TestFragment() :
 
     override fun doWork() {
         vm.mTxt.observe(this, txtObserver)
+        vb.testTv.setOnClickListener {
+            ARouter.getInstance().build(ArouterConstant.APP_TEST).navigation()
+        }
     }
 
     override fun handlerMsg(msg: Message) {
@@ -33,4 +39,3 @@ class TestFragment() :
         }
     }
 }
-

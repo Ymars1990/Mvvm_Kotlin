@@ -15,9 +15,8 @@ import com.ymars.poj.comutils.LogTools
  * @author Mars
  * 基类Activity
  */
-abstract class LifecycerActivity<VM : BaseViewModel<*>, VB : ViewBinding> : BaseActivity() {
+abstract class LifecycerActivity<VM : BaseViewModel<*>,VB:ViewBinding> : BaseActivity<VB>() {
     lateinit var vm: VM
-    lateinit var vb: VB
 
     override fun initParams(savedInstanceState: Bundle?) {
         vm = ViewModelProvider.AndroidViewModelFactory(application)
