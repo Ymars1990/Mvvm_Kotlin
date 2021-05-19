@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="splashVm"
             type="com.mars.splash.model.SplashViewModel" />
@@ -18,27 +19,29 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/sloganCsl"
             app:layout_constraintTop_toTopOf="parent">
+
             <ImageView
                 android:id="@+id/adIv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"
-               />
+                android:scaleType="fitXY" />
+
             <TextView
                 android:id="@+id/adDuraTv"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="@dimen/dp40"
+                android:layout_height="@dimen/dp40"
                 android:layout_marginTop="@dimen/dp10"
                 android:layout_marginEnd="@dimen/dp10"
                 android:background="@drawable/semi_round"
-                android:textColor="@color/white"
                 android:gravity="center"
-                android:textSize="@dimen/sp15"
                 android:onClick="click"
                 android:text="10s"
-                android:layout_height="@dimen/dp40"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp15"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/sloganCsl"
             android:layout_width="match_parent"
