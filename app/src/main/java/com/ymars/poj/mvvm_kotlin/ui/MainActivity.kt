@@ -5,14 +5,18 @@ import android.os.Message
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.mars.splash.SplashActivity
 import com.ymars.poj.base.ui.LifecycerActivity
 import com.ymars.poj.component.ArouterConstant
 import com.ymars.poj.comutils.LogTools
+import com.ymars.poj.comutils.bean.SwitchIconTask
+import com.ymars.poj.comutils.manager.LauncherIconManager
 import com.ymars.poj.mvvm_kotlin.R
 import com.ymars.poj.mvvm_kotlin.adapter.MainTabAdapter
 import com.ymars.poj.mvvm_kotlin.bean.TabBean
 import com.ymars.poj.mvvm_kotlin.databinding.ActivityMainBinding
 import com.ymars.poj.mvvm_kotlin.model.MainViewModel
+import java.text.SimpleDateFormat
 
 @Route(path = ArouterConstant.APP_MAIN)
 class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
@@ -41,6 +45,23 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
         vm.getTabBean()
         adapter = MainTabAdapter(vm)
         vb.tabRv.adapter = adapter
+
+        val format = SimpleDateFormat("yyyy-MM-dd")
+
+        LauncherIconManager.addNewTask(
+            SwitchIconTask(
+                SplashActivity::class.java.name,
+                "$packageName.SplashAlias1Activity",
+                format.parse("2021-06-09").time,
+                format.parse("2021-06-10").time
+            ),
+            SwitchIconTask(
+                SplashActivity::class.java.name,
+                "$packageName.SplashAlias2Activity",
+                format.parse("2021-06-11").time,
+                format.parse("2021-06-13").time
+            )
+        )
 
     }
 

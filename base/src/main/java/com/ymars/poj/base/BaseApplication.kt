@@ -3,6 +3,7 @@ package com.ymars.poj.base
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.ymars.poj.comutils.LogTools
+import com.ymars.poj.comutils.manager.LauncherIconManager
 
 open class BaseApplication : Application() {
 

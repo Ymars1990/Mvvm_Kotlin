@@ -4,7 +4,7 @@
     package="com.ymars.poj.mvvm_kotlin">
 
     <application
-        android:name=".MainApplication"
+        android:name="com.ymars.poj.mvvm_kotlin.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,21 +18,43 @@
         <activity
             android:name="com.mars.splash.SplashActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity-alias
+            android:name=".SplashAlias1Activity"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher"
+            android:targetActivity="com.mars.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".SplashAlias2Activity"
+            android:enabled="false"
+            android:icon="@mipmap/eason"
+            android:targetActivity="com.mars.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
         <activity
             android:name=".ui.MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".ui.TestActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
     </application>
 
 </manifest>
