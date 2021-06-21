@@ -21,6 +21,10 @@ object RunningStateRegister {
                     callback.onBackground()
                 }
             }
+
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+                TODO("Not yet implemented")
+            }
         })
     }
 
@@ -38,7 +42,9 @@ object RunningStateRegister {
         override fun onActivityResumed(activity: Activity) {}
         override fun onActivityPaused(activity: Activity) {}
         override fun onActivityStopped(activity: Activity) {}
-        override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle?) {}
+        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+            TODO("Not yet implemented")
+        }
         override fun onActivityDestroyed(activity: Activity) {}
     }
 }
