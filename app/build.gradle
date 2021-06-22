@@ -13,7 +13,7 @@ android {
         applicationId "com.ymars.poj.mvvm_kotlin"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
+        versionCode 100
         versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,7 +24,7 @@ android {
             }
         }
     }
-   productFlavors {
+    productFlavors {
         kuan {}
         xiaomi {}
         qh360 {}
@@ -32,16 +32,37 @@ android {
         wandoujia {}
     }
     productFlavors.all {
-       flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
-}
+        flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+    }
+    //自定义APK名称,多渠道打包
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            variant.productFlavors.each { flavor ->
+                def project = "mvvm_kotlin"
+                def separator = "_"
+                def buildType = buildType.name
+                def versionName = variant.versionName
+                def versionCode = variant.versionCode
+                def date = new Date()
+                def formattedDate = date.format('yyyyMMdd')
+
+                def apkName = project + separator + "v" + versionName + separator + versionCode + separator + buildType + separator + flavor.name + ".apk"
+                if (buildType == "release") {
+                    apkName = project + separator + "v" + versionName + separator + versionCode + separator + buildType + separator + flavor.name + separator + formattedDate + ".apk"
+                }
+
+                output.outputFileName = apkName
+            }
+        }
+    }
 
     signingConfigs {
         release {
             //签名文件路径，绝对路径
-            storeFile file('D:\\mas android\\my proj\\Mvvm_Kotlin\\mvvm_kotlin.jks')
+            storeFile file('D:\\mvvmkotlin_pkcs12.jks')
             storePassword '123456' //密码
             keyAlias 'mvvm_kotlin'
-            keyPassword 'Mars123456' //密码
+            keyPassword '123456' //密码
         }
     }
     buildTypes {
