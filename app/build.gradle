@@ -37,7 +37,6 @@ android {
     //自定义APK名称,多渠道打包
     android.applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            variant.getPackageApplication().outputDirectory = new File("D:\\")
             variant.productFlavors.each { flavor ->
                 def project = "mvvm_kotlin"
                 def separator = "_"
@@ -49,6 +48,7 @@ android {
 
                 def apkName = project + separator + "v" + versionName + separator + versionCode + separator + buildType + separator + flavor.name + ".apk"
                 if (buildType == "release") {
+                    variant.getPackageApplication().outputDirectory = new File("D:/apks/")
                     apkName = project + separator + "v" + versionName + separator + versionCode + separator + buildType + separator + flavor.name + separator + formattedDate + ".apk"
                 }
                 output.outputFileName = apkName
