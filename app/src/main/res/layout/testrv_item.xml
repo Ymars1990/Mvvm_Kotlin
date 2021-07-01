@@ -2,8 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
+        <import type="com.bumptech.glide.Glide" />
+
         <variable
-            name="testVModel"
+            name="testDataBean"
+            type="com.mars.splash.bean.SplashAdBean.AdBean" />
+
+        <variable
+            name="testDataModel"
             type="com.ymars.poj.mvvm_kotlin.model.TestViewModel" />
     </data>
 
@@ -12,14 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/testRv"
+        <ImageView
+            android:id="@+id/testdataLogoIv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_default"
+            app:img_url="@{testDataBean.img}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

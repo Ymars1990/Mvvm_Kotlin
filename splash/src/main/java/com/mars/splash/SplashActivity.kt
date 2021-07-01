@@ -105,7 +105,6 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
                 Glide.with(this)
                     .load(it.vertical[radom].wp)
                     .into(vb.adIv)
-
                 LogTools.i(TAG, it.toString())
             }
         }

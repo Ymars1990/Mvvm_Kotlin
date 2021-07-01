@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<T,V:ViewDataBinding>(var data: ArrayList<T> = arrayListOf()) :
+abstract class BaseAdapter<T, V : ViewDataBinding>(var data: ArrayList<T> = arrayListOf()) :
     RecyclerView.Adapter<BaseViewHolder<V>>() {
     val TAG: String by lazy {
         this.javaClass.simpleName
@@ -33,6 +33,11 @@ abstract class BaseAdapter<T,V:ViewDataBinding>(var data: ArrayList<T> = arrayLi
 
     fun refreshData(data: ArrayList<T>) {
         this.data.clear()
+        this.data.addAll(data)
+        this.notifyDataSetChanged()
+    }
+
+    fun addData(data: ArrayList<T>) {
         this.data.addAll(data)
         this.notifyDataSetChanged()
     }

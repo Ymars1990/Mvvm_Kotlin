@@ -1,6 +1,7 @@
 package com.ymars.poj.mvvm_kotlin.repository
 
 import com.mars.network.base.BaseApiService
+import com.mars.network.base.BaseReponse
 import com.mars.splash.bean.SplashAdBean
 import com.ymars.poj.mvvm_kotlin.bean.TabBean
 import io.reactivex.Observable
@@ -16,6 +17,6 @@ interface MainService:BaseApiService {
      * 获取启动页广告
      */
     @GET("/v1/vertical/vertical")
-    fun getTabBean(): Observable<ArrayList<TabBean>>
+    suspend fun getTestData(): BaseReponse<SplashAdBean>
 
 }

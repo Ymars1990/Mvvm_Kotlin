@@ -77,8 +77,6 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
             it?.let {
                 LogTools.i(TAG, vm.tabBeans.value?.get(it).toString())
                 txt = vm.tabBeans.value?.get(it)?.txt!!
-                testFragment!!.vm.mTxt.postValue(txt)
-
             }
         }
     }
