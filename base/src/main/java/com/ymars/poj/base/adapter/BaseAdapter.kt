@@ -2,12 +2,16 @@ package com.ymars.poj.base.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.ymars.poj.base.myinterface.OnItemClicker
 
-abstract class BaseAdapter<T, V : ViewDataBinding>(var data: ArrayList<T> = arrayListOf()) :
+abstract class BaseAdapter<T, V : ViewDataBinding> constructor(var data: ArrayList<T> = arrayListOf()) :
     RecyclerView.Adapter<BaseViewHolder<V>>() {
+    lateinit var onItemClicker: OnItemClicker<T>
+
     val TAG: String by lazy {
         this.javaClass.simpleName
     }

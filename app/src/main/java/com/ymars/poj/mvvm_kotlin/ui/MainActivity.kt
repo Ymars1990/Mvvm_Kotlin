@@ -19,7 +19,7 @@ import com.ymars.poj.mvvm_kotlin.model.MainViewModel
 import java.text.SimpleDateFormat
 
 @Route(path = ArouterConstant.APP_MAIN)
-class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
+class MainActivity : LifecycerActivity<MainViewModel,ActivityMainBinding >() {
     var adapter: MainTabAdapter? = null
     var txt: String = "首页"
 
