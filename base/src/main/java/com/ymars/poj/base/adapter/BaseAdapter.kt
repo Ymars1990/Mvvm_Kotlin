@@ -35,13 +35,13 @@ abstract class BaseAdapter<T, V : ViewDataBinding> constructor(var data: ArrayLi
         }
     }
 
-    fun refreshData(data: ArrayList<T>) {
+    fun refreshData(data: MutableList<T>) {
         this.data.clear()
         this.data.addAll(data)
         this.notifyDataSetChanged()
     }
 
-    fun addData(data: ArrayList<T>) {
+    fun addData(data: MutableList<T>) {
         this.data.addAll(data)
         this.notifyDataSetChanged()
     }

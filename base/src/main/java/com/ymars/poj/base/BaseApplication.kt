@@ -1,9 +1,14 @@
 package com.ymars.poj.base
 
 import android.app.Application
+import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.ymars.poj.comutils.LogTools
-import com.ymars.poj.comutils.manager.LauncherIconManager
+
 
 open class BaseApplication : Application() {
 
@@ -12,14 +17,27 @@ open class BaseApplication : Application() {
             get() {
                 if (field == null) {
                     field = BaseApplication()
+                    initSmartRefreshLayout()
                 }
                 return field
             }
+
+        private fun initSmartRefreshLayout() {
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context, layout: RefreshLayout ->
+                layout.setPrimaryColorsId(R.color.app_theme_title_color, android.R.color.white);
+                ClassicsHeader(context)
+            }
+            SmartRefreshLayout.setDefaultRefreshFooterCreator { context: Context, layout: RefreshLayout ->
+                layout.setPrimaryColorsId(R.color.app_theme_title_color, android.R.color.white);
+                ClassicsFooter(context)
+            }
+        }
 
         @Synchronized
         fun get(): BaseApplication {
             return instance!!
         }
+
     }
 
     val TAG: String by lazy {
@@ -46,4 +64,5 @@ open class BaseApplication : Application() {
     open fun initModuleApp(application: BaseApplication?) {
 
     }
+
 }

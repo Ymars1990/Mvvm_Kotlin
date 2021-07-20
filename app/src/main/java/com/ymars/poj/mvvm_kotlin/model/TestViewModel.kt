@@ -13,11 +13,11 @@ import com.ymars.poj.mvvm_kotlin.repository.MainService
  */
 class TestViewModel(application: Application) : BaseViewModel<MainService>(application) {
     val mRvData: MutableLiveData<SplashAdBean> = MutableLiveData<SplashAdBean>()
-    fun getTestData() {
+    fun getTestData(page:Int) {
         launch(
             { apiService.getTestData() },
             mRvData,
-            NetConstant.BASE_SERVER_URL.plus("/v1/vertical/vertical")
+            NetConstant.BASE_SERVER_URL.plus("/v1/vertical/vertical?limit=4&first=$page")
         )
     }
 
