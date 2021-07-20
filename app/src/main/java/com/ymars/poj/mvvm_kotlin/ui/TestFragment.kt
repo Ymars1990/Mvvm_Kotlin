@@ -31,7 +31,7 @@ class TestFragment :
     override fun doWork() {
         initData()
         vb.smrl.setOnRefreshLoadMoreListener(this)
-
+        vb.smrl.setEnableAutoLoadMore(false)
         vm.mRvData.observe(this, rvDataObserver)
         vb.testRv.layoutManager = LinearLayoutManager(mCtx)
         vb.testRv.adapter = adapter
