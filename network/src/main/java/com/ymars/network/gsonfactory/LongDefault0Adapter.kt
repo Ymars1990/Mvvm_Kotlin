@@ -1,4 +1,4 @@
-package com.mars.network.gsonfactory
+package com.ymars.network.gsonfactory
 
 import com.google.gson.*
 import java.lang.reflect.Type

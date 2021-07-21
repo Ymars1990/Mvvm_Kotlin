@@ -5,7 +5,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import com.mars.network.base.BaseError
+import com.ymars.network.base.BaseError
 import com.ymars.poj.base.model.BaseViewModel
 import com.ymars.poj.base.state.DataState
 import com.ymars.poj.comutils.ClassReflectUtils

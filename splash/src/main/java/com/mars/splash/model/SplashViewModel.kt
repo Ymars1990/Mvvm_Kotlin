@@ -2,8 +2,8 @@ package com.mars.splash.model
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.mars.network.NetConstant
-import com.mars.network.RetrofitManagerFactory
+import com.ymars.network.NetConstant
+import com.ymars.network.RetrofitManagerFactory
 import com.mars.splash.bean.SplashAdBean
 import com.mars.splash.repository.SplashService
 import com.ymars.poj.base.model.BaseViewModel

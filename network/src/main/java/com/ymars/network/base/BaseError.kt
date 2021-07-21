@@ -1,4 +1,4 @@
-package com.mars.network.base
+package com.ymars.network.base
 
 data class BaseError(var code: Int, var errorMsg: String?, var reqUrl: String){
     override fun toString(): String {

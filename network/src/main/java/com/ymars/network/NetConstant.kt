@@ -1,4 +1,4 @@
-package com.mars.network
+package com.ymars.network
 
 class NetConstant {
     companion object {

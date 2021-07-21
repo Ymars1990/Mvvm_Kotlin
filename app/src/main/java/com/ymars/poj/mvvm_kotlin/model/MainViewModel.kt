@@ -3,7 +3,7 @@ package com.ymars.poj.mvvm_kotlin.model
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.MutableLiveData
-import com.mars.network.RetrofitManagerFactory
+import com.ymars.network.RetrofitManagerFactory
 import com.ymars.poj.base.model.BaseViewModel
 import com.ymars.poj.comutils.LogTools
 import com.ymars.poj.mvvm_kotlin.R

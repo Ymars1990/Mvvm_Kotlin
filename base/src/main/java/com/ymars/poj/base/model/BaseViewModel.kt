@@ -4,10 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.mars.network.RetrofitManagerFactory
-import com.mars.network.base.BaseApiService
-import com.mars.network.base.BaseError
-import com.mars.network.base.BaseReponse
+import com.ymars.network.RetrofitManagerFactory
+import com.ymars.network.base.BaseApiService
+import com.ymars.network.base.BaseError
+import com.ymars.network.base.BaseReponse
 import com.ymars.poj.base.state.DataState
 import com.ymars.poj.comutils.ClassReflectUtils
 import com.ymars.poj.comutils.LogTools

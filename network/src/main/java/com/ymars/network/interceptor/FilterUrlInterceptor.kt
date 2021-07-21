@@ -1,6 +1,6 @@
-package com.mars.network.interceptor
+package com.ymars.network.interceptor
 
-import com.mars.network.NetConstant.Companion.BASE_SERVER_URL
+import com.ymars.network.NetConstant.Companion.BASE_SERVER_URL
 import com.ymars.poj.comutils.KtStringUtils
 import com.ymars.poj.comutils.LogTools
 import okhttp3.*

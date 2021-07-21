@@ -1,14 +1,11 @@
-package com.mars.network
+package com.ymars.network
 
-import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.mars.network.interceptor.LoggingInterceptor
-import com.mars.network.gsonfactory.*
-import com.mars.network.interceptor.FilterUrlInterceptor
+import com.ymars.network.interceptor.FilterUrlInterceptor
+import com.ymars.network.interceptor.LoggingInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
