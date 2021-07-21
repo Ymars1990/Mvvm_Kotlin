@@ -11,8 +11,9 @@ import com.bumptech.glide.Glide
 import com.mars.splash.bean.SplashAdBean
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
+import com.ymars.news.ui.fragment.NewsMainFragment
 import com.ymars.poj.base.myinterface.OnItemClicker
-import com.ymars.poj.base.ui.LifrcyclerFragment
+import com.ymars.poj.base.ui.LifecyclerFragment
 import com.ymars.poj.comutils.LogTools
 import com.ymars.poj.mvvm_kotlin.R
 import com.ymars.poj.mvvm_kotlin.adapter.TestDataAdapter
@@ -20,10 +21,20 @@ import com.ymars.poj.mvvm_kotlin.databinding.FragmentTestBinding
 import com.ymars.poj.mvvm_kotlin.model.TestViewModel
 
 class TestFragment :
-    LifrcyclerFragment<TestViewModel, FragmentTestBinding>(), OnItemClicker<SplashAdBean.AdBean>,
+    LifecyclerFragment<TestViewModel, FragmentTestBinding>(), OnItemClicker<SplashAdBean.AdBean>,
     OnRefreshLoadMoreListener {
     var adapter: TestDataAdapter? = null
     var sIsScrolling: Boolean = false;
+
+    companion object {
+        fun newInstance(tag:String)= TestFragment().apply {
+            var arguments = Bundle(1).apply {
+                putString("tag", tag)
+            }
+        }
+
+    }
+
     override fun setLayout(savedInstanceState: Bundle?): Int {
         return R.layout.fragment_test
     }

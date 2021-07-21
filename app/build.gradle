@@ -92,6 +92,7 @@ android {
 dependencies {
 
     implementation 'com.alibaba:arouter-api:1.5.0'
+    implementation project(path: ':news')
 
     kapt 'com.alibaba:arouter-compiler:1.2.2'
 

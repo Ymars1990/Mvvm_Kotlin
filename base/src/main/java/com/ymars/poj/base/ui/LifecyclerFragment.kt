@@ -11,7 +11,7 @@ import com.ymars.poj.base.state.DataState
 import com.ymars.poj.comutils.ClassReflectUtils
 import com.ymars.poj.comutils.LogTools
 
-abstract class LifrcyclerFragment<VM : BaseViewModel<*>, VB : ViewBinding> : BaseFragment<VB>() {
+abstract class LifecyclerFragment<VM : BaseViewModel<*>, VB : ViewBinding> : BaseFragment<VB>() {
     lateinit var vm: VM
 
     override fun onAttach(context: Context) {
