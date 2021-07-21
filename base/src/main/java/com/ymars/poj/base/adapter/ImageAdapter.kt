@@ -14,10 +14,9 @@ class ImageAdapter {
             this.javaClass.simpleName
         }
 
-        @BindingAdapter("app:img_url")
+        @BindingAdapter("app:img_res")
         @JvmStatic
-        fun setSrcByImgRes(view: ImageView, img_url: String) {
-            LogTools.i(TAG, img_url)
+        fun setSrcByImgRes(view: ImageView, img_url: Int) {
             Glide.with(view.context)
                 .load(img_url)
                 .placeholder(R.mipmap.ic_default)
@@ -25,5 +24,14 @@ class ImageAdapter {
                 .into(view)
         }
 
+        @BindingAdapter("app:img_url")
+        @JvmStatic
+        fun setSrcByImgUrl(view: ImageView, img_url: String) {
+            Glide.with(view.context)
+                .load(img_url)
+                .placeholder(R.mipmap.ic_default)
+                .error(R.mipmap.ic_default)
+                .into(view)
+        }
     }
 }

@@ -30,14 +30,13 @@
             android:layout_width="@dimen/dp25"
             android:layout_height="@dimen/dp25"
             android:scaleType="fitXY"
-            app:img_url="@{tabBean.netIcon}" />
+            app:img_res="@{tabBean.rid}" />
 
         <TextView
             android:id="@+id/tabTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{tabBean.txt}"
-            android:textColor="@{tabBean.state==1?0xFF6200EE:0xFF000000}"
             android:textSize="@dimen/sp12" />
 
     </LinearLayout>
