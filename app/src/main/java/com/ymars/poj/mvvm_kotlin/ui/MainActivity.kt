@@ -52,9 +52,11 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
         listFragment!!.put(1, testFragment1!!)
         listFragment!!.put(2, testFragment2!!)
 
+        adapter = MainTabAdapter(vm)
+
+
         fragmentAdapter =
             CustFragmentPagerAdapter(supportFragmentManager, lifecycle, listFragment!!)
-        adapter = MainTabAdapter(vm)
 
 
     }
@@ -69,7 +71,23 @@ class MainActivity : LifecycerActivity<MainViewModel, ActivityMainBinding>() {
         vb.vp2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 LogTools.i(TAG, "Viewpager2 滑动:" + position)
-                vm.tabBeans.value?.get(position)?.state = 1
+                if (vm.tabSelectPos.value != position) {
+                    for (item: TabBean in vm.tabBeans.value!!) {
+                        if (item.pos == position) {
+                            item.state = 1
+                            vm.tabSelectPos.postValue(position)
+                            vm.tabBeans!!.value!!.get(position).rid =
+                                vm.tabIconOn!!.value?.get(position) ?: R.mipmap.ic_default
+                        } else {
+                            item.state = 0
+                            vm.tabBeans!!.value!!.get(item.pos).rid =
+                                vm.tabIconOff!!.value?.get(item.pos) ?: R.mipmap.ic_default
+                        }
+                    }
+                    vm.tabBeans.postValue(vm.tabBeans.value)
+                } else {
+                    LogTools.i(TAG, "点击tab 与上次tab相同")
+                }
             }
         })
 

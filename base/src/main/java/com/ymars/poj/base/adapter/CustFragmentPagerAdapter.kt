@@ -9,7 +9,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class CustFragmentPagerAdapter : FragmentStateAdapter {
     private var fragments: SparseArray<Fragment>
-
     constructor(
         manager: FragmentManager,
         lifecycle: Lifecycle,

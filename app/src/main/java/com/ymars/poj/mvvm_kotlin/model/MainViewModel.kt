@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.ymars.network.RetrofitManagerFactory
 import com.ymars.poj.base.model.BaseViewModel
+import com.ymars.poj.base.myinterface.OnItemClicker
 import com.ymars.poj.comutils.LogTools
 import com.ymars.poj.mvvm_kotlin.R
 import com.ymars.poj.mvvm_kotlin.bean.TabBean
@@ -12,7 +13,7 @@ import com.ymars.poj.mvvm_kotlin.repository.MainService
 
 /**
  */
-class MainViewModel(application: Application) : BaseViewModel<MainService>(application) {
+class MainViewModel(application: Application) : BaseViewModel<MainService>(application) ,OnItemClicker<TabBean>{
     val tabIconOn: MutableLiveData<ArrayList<Int>> by lazy {
         MutableLiveData<ArrayList<Int>>().also {
             it.value = arrayListOf(R.mipmap.ic_news_on, R.mipmap.ic_video_on, R.mipmap.ic_user_on)
@@ -37,7 +38,7 @@ class MainViewModel(application: Application) : BaseViewModel<MainService>(appli
     }
 
     var tabSelectPos: MutableLiveData<Int> = MutableLiveData<Int>(0)
-    fun onItemClick(v: View, tabBean: TabBean) {
+    override fun onItemClick(v: View, tabBean: TabBean, pos:Int) {
         when (v.id) {
             R.id.tabItemLl -> {
                 if (tabSelectPos.value != tabBean.pos) {

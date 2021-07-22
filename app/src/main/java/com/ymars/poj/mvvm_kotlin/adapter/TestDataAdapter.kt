@@ -25,4 +25,5 @@ class TestDataAdapter(var mVm: TestViewModel) :
     override fun getItemViewType(position: Int): Int {
         return R.layout.testrv_item
     }
+
 }

@@ -23,4 +23,5 @@ class MainTabAdapter(var mVm: MainViewModel) : BaseAdapter<TabBean, MaintabItemB
     override fun getItemViewType(position: Int): Int {
         return R.layout.maintab_item
     }
+
 }
