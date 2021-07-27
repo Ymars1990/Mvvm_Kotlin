@@ -9,11 +9,11 @@ import com.ymars.poj.base.model.BaseViewModel
 
 class NewsMainViewModel(application: Application) : BaseViewModel<NewsService>(application) {
 
-    val adInfor: MutableLiveData<ArrayList<NewsBannerBean>> = MutableLiveData()
+    val banner: MutableLiveData<ArrayList<NewsBannerBean>> = MutableLiveData()
     fun getBanner() {
         launch(
             { apiService.getBanner() },
-            adInfor,
+            banner,
             "https://www.wanandroid.com/banner/json"
         )
     }

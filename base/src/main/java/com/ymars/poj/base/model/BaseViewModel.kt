@@ -4,15 +4,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ymars.network.RetrofitManagerFactory
 import com.ymars.network.base.BaseApiService
 import com.ymars.network.base.BaseError
 import com.ymars.network.base.BaseReponse
 import com.ymars.poj.base.state.DataState
-import com.ymars.poj.comutils.ClassReflectUtils
 import com.ymars.poj.comutils.LogTools
-import kotlinx.coroutines.*
-import java.lang.reflect.ParameterizedType
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * @author Mars
