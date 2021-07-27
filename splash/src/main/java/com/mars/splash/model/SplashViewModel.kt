@@ -11,13 +11,7 @@ import com.ymars.poj.base.model.BaseViewModel
 class SplashViewModel(application: Application) : BaseViewModel<SplashService>(application) {
 
     val adInfor: MutableLiveData<SplashAdBean> = MutableLiveData()
-    fun showAd() {
-        launch(
-            { apiService.getSplashAd() },
-            adInfor,
-            NetConstant.BASE_SERVER_URL.plus("/v1/vertical/vertical")
-        )
-    }
+
 
     override fun initApiservice(): SplashService {
         return RetrofitManagerFactory.instance.create(SplashService::class.java)

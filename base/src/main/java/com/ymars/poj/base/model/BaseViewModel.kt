@@ -41,12 +41,12 @@ open abstract class BaseViewModel<T : BaseApiService>(application: Application) 
         viewModelScope.launch {
             try {
                 val result = withContext(Dispatchers.IO) { block() }
-                if (result.code == 0) {//请求成功
-                    liveData.postValue(result.res)
+                if (result.errorCode == 0) {//请求成功
+                    liveData.postValue(result.data)
                     loadState.postValue(DataState.DataStateType.SUCCESS)
                 } else {
                     loadState.postValue(DataState.DataStateType.ERROR)
-                    errorData.postValue(BaseError(result.code, result.msg, reqUrl))
+                    errorData.postValue(BaseError(result.errorCode, result.errorMsg, reqUrl))
                 }
             } catch (e: Throwable) {//接口请求失败
                 LogTools.e(TAG, "请求异常>>" + e.message)

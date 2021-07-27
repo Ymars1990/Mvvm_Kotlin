@@ -2,6 +2,7 @@ package com.ymars.news.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.ymars.network.NetConstant
 import com.ymars.network.RetrofitManagerFactory
 import com.ymars.news.bean.NewsBannerBean
 import com.ymars.news.repository.NewsService
@@ -14,7 +15,7 @@ class NewsMainViewModel(application: Application) : BaseViewModel<NewsService>(a
         launch(
             { apiService.getBanner() },
             banner,
-            "https://www.wanandroid.com/banner/json"
+            NetConstant.BASE_SERVER_URL.plus("/banner/json")
         )
     }
 

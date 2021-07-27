@@ -21,13 +21,11 @@ import com.ymars.poj.mvvm_kotlin.databinding.FragmentTestBinding
 import com.ymars.poj.mvvm_kotlin.model.TestViewModel
 
 class TestFragment :
-    LifecyclerFragment<TestViewModel, FragmentTestBinding>(), OnItemClicker<SplashAdBean.AdBean>,
-    OnRefreshLoadMoreListener {
+    LifecyclerFragment<TestViewModel, FragmentTestBinding>() {
     var adapter: TestDataAdapter? = null
-    var sIsScrolling: Boolean = false;
 
     companion object {
-        fun newInstance(tag:String)= TestFragment().apply {
+        fun newInstance(tag: String) = TestFragment().apply {
             var arguments = Bundle(1).apply {
                 putString("tag", tag)
             }
@@ -40,87 +38,12 @@ class TestFragment :
     }
 
     override fun doWork() {
-        initData()
-        vb.smrl.setOnRefreshLoadMoreListener(this)
-        vb.smrl.setEnableAutoLoadMore(false)
-        vm.mRvData.observe(this, rvDataObserver)
-        vb.testRv.layoutManager = LinearLayoutManager(mCtx)
-        vb.testRv.adapter = adapter
-        val obj = object : OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING) {
-                    sIsScrolling = true;
-                    Glide.with(mCtx).pauseRequests();
-                } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    if (sIsScrolling == true) {
-                        Glide.with(mCtx).resumeRequests();
 
-                    }
-                    sIsScrolling = false;
-                }
-            }
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-            }
-        }
-        vb.testRv.addOnScrollListener(obj)
     }
 
     override fun handlerMsg(msg: Message) {
 
     }
 
-    private var page: Int = 1
-    var pageSize: Int = 5
-    private var data: MutableList<SplashAdBean.AdBean> = arrayListOf()
-    private val rvDataObserver by lazy {
-        Observer<SplashAdBean> {
-            it?.let {
-                LogTools.i(TAG, "当前页码:".plus(page))
-                if (it.vertical.size >= pageSize) {
-                    data = it.vertical.subList(
-                        (page - 1) * pageSize,
-                        page * pageSize
-                    )
-                } else {
-                    data = it.vertical
-                }
-                if (page == 1) {
-                    adapter!!.refreshData(data)
-                } else {
-                    adapter!!.addData(data)
-                }
-                if (data.size >= pageSize) {
-                    page++
-                }
-                LogTools.i(TAG, "当前请求ListSize:".plus(data.size))
-            }
-            vb.smrl.finishRefresh()
-            vb.smrl.finishLoadMore()
-        }
-    }
 
-    override fun onItemClick(v: View, data: SplashAdBean.AdBean, pos: Int) {
-        LogTools.i(TAG, data.toString())
-
-    }
-
-    private fun initData() {
-        adapter = TestDataAdapter(vm, this);
-    }
-
-    override fun onRefresh(refreshLayout: RefreshLayout) {
-        page = 1
-        getTestData()
-    }
-
-    override fun onLoadMore(refreshLayout: RefreshLayout) {
-        getTestData()
-    }
-
-    fun getTestData() {
-        vm.getTestData(page)
-    }
 }

@@ -12,10 +12,4 @@ import retrofit2.http.GET
  */
 interface SplashService: BaseApiService {
 
-
-    /**
-     * 获取启动页广告
-     */
-    @GET("/v1/vertical/vertical")
-    suspend fun getSplashAd(): BaseReponse<SplashAdBean>
 }

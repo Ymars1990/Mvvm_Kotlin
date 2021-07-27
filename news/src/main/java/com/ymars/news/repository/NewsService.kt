@@ -15,6 +15,6 @@ interface NewsService : BaseApiService {
     /**
      * 获取轮播
      */
-    @GET("/v1/vertical/vertical")
+    @GET("/banner/json")
     suspend fun getBanner(): BaseReponse<ArrayList<NewsBannerBean>>
 }

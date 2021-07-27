@@ -54,8 +54,11 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
 
     override fun doWork() {
         handler.sendEmptyMessage(0x01);
-        vm.showAd()
-        vm.adInfor.observe(this, observer)
+        Glide.with(this)
+            .load("http://img5.adesk.com/60fa6fa9e7bce71e0489ca23?imageMogr2/thumbnail/!1080x1920r/gravity/Center/crop/1080x1920&sign=e09e39a154ae4c8d09dff0772b80a6b4&t=60ffafba")
+            .into(vb.adIv)
+//        vm.showAd()
+//        vm.adInfor.observe(this, observer)
     }
 
     var duration: Long = 0
@@ -103,7 +106,8 @@ class SplashActivity : LifecycerActivity<SplashViewModel, ActivitySplashBinding>
                 LogTools.i(TAG, "" + it.vertical.size)
                 LogTools.i(TAG, it.vertical[radom].toString())
                 Glide.with(this)
-                    .load(it.vertical[radom].wp)
+//                    .load(it.vertical[radom].wp)
+                    .load("http://img5.adesk.com/60fa6fa9e7bce71e0489ca23?imageMogr2/thumbnail/!1080x1920r/gravity/Center/crop/1080x1920&sign=e09e39a154ae4c8d09dff0772b80a6b4&t=60ffafba")
                     .into(vb.adIv)
                 LogTools.i(TAG, it.toString())
             }
